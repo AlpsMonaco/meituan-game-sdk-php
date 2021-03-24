@@ -7,7 +7,13 @@ class meituan
     public static function createKey($password)
     {
         $key = sha1($password, true);
-        $key = $key . chr(0) . chr(0) . chr(0) . chr(0) . chr(0) . chr(0) . chr(0) . chr(0) . chr(0) . chr(0) . chr(0) . chr(0);
+        // $key = $key . chr(0) . chr(0) . chr(0) . chr(0) . chr(0) . chr(0) . chr(0) . chr(0) . chr(0) . chr(0) . chr(0) . chr(0);
+        $keyLength = count($key);
+
+        for($i=0;$i<16-$keyLength;$i++){
+            $key = $key.chr(0);
+        }
+
         return base64_encode($key);
     }
 
